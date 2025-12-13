@@ -43,30 +43,42 @@ export function Newsletter() {
   }
 
   return (
-    <section id="newsletter" className="py-16 bg-primary">
-      <div className="container mx-auto px-4 lg:px-8">
-        <div className="max-w-3xl mx-auto text-center space-y-6">
-          <h3 className="text-2xl md:text-3xl font-bold text-primary-foreground">{t.newsletter.title}</h3>
+    <section id="newsletter" className="py-20 bg-gradient-to-r from-primary via-primary to-secondary relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(255,255,255,0.1),transparent_50%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(245,206,69,0.1),transparent_50%)]" />
+      
+      <div className="container mx-auto px-4 lg:px-8 relative z-10">
+        <div className="max-w-3xl mx-auto text-center space-y-8">
+          <h3 className="text-2xl md:text-4xl font-bold text-primary-foreground">{t.newsletter.title}</h3>
 
-          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
             <Input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder={t.newsletter.placeholder}
               required
-              className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/60"
+              className="bg-white/10 border-white/20 text-primary-foreground placeholder:text-primary-foreground/60 focus:border-accent/50 focus:ring-2 focus:ring-accent/20 transition-all duration-300 h-12"
             />
             <Button
               type="submit"
               disabled={isLoading}
-              className="bg-accent text-accent-foreground hover:bg-accent/90 flex-shrink-0"
+              className="bg-accent text-accent-foreground hover:bg-accent/90 hover:scale-105 active:scale-95 transition-all duration-300 flex-shrink-0 h-12 px-8 shadow-lg shadow-accent/30"
             >
               {isLoading ? t.newsletter.subscribing : t.newsletter.subscribe}
             </Button>
           </form>
-          {message && <p className="text-sm text-primary-foreground/80">{t.newsletter.success}</p>}
-          {error && <p className="text-sm text-red-200">{t.newsletter.error}</p>}
+          {message && (
+            <p className="text-sm text-primary-foreground/90 animate-fade-in bg-white/10 inline-block px-4 py-2 rounded-full">
+              {t.newsletter.success}
+            </p>
+          )}
+          {error && (
+            <p className="text-sm text-red-200 animate-fade-in bg-red-500/20 inline-block px-4 py-2 rounded-full">
+              {t.newsletter.error}
+            </p>
+          )}
         </div>
       </div>
     </section>

@@ -99,32 +99,32 @@ export function Portfolio() {
           <TabsList className="grid grid-cols-3 gap-2 h-auto bg-transparent max-w-md mx-auto mb-12">
             <TabsTrigger
               value="graphic"
-              className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+              className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-lg data-[state=active]:shadow-primary/20 transition-all duration-300 hover:bg-primary/10"
             >
               {t.portfolio.tabs.graphic}
             </TabsTrigger>
             <TabsTrigger
               value="video"
-              className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+              className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-lg data-[state=active]:shadow-primary/20 transition-all duration-300 hover:bg-primary/10"
             >
               {t.portfolio.tabs.video}
             </TabsTrigger>
             <TabsTrigger
               value="motion"
-              className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+              className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-lg data-[state=active]:shadow-primary/20 transition-all duration-300 hover:bg-primary/10"
             >
               {t.portfolio.tabs.motion}
             </TabsTrigger>
           </TabsList>
 
           {portfolioKeys.map((key) => (
-            <TabsContent key={key} value={key}>
-              <div className="grid md:grid-cols-2 gap-6">
+            <TabsContent key={key} value={key} className="animate-fade-in">
+              <div className="grid md:grid-cols-2 gap-8">
                 {key === "graphic"
                   ? graphicItems.map((item, index) => (
                       <Card
                         key={index}
-                        className="group overflow-hidden bg-card border-border hover:border-accent transition-all duration-300 cursor-pointer"
+                        className="group overflow-hidden bg-card border-border hover:border-accent hover:-translate-y-2 hover:shadow-2xl hover:shadow-accent/10 transition-all duration-500 cursor-pointer"
                         onClick={() => setSelectedItem(item)}
                       >
                         <div className="aspect-video relative overflow-hidden">
@@ -132,13 +132,14 @@ export function Portfolio() {
                             src={item.images[0]}
                             alt={item.title}
                             fill
-                            className="object-cover group-hover:scale-105 transition-transform duration-500"
+                            className="object-cover group-hover:scale-110 transition-transform duration-700"
                             sizes="(min-width: 768px) 50vw, 100vw"
                           />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                         </div>
                         <div className="p-6">
                           <span className="text-xs text-accent font-medium uppercase tracking-wider">{item.subtitle}</span>
-                          <h3 className="text-xl font-bold mt-2 group-hover:text-primary transition-colors">
+                          <h3 className="text-xl font-bold mt-2 group-hover:text-primary transition-colors duration-300">
                             {item.title}
                           </h3>
                         </div>
@@ -147,14 +148,14 @@ export function Portfolio() {
                   : t.portfolio[key].map((item, index) => (
                       <Card
                         key={index}
-                        className="group overflow-hidden bg-card border-border hover:border-accent transition-all duration-300 cursor-pointer"
+                        className="group overflow-hidden bg-card border-border hover:border-accent hover:-translate-y-2 hover:shadow-2xl hover:shadow-accent/10 transition-all duration-500 cursor-pointer"
                       >
                         <div className="aspect-video relative overflow-hidden">
-                          <div className="w-full h-full bg-gradient-to-br from-primary/20 to-accent/10" />
+                          <div className="w-full h-full bg-gradient-to-br from-primary/20 to-accent/10 group-hover:from-primary/30 group-hover:to-accent/20 transition-all duration-500" />
                         </div>
                         <div className="p-6">
                           <span className="text-xs text-accent font-medium">{item.category}</span>
-                          <h3 className="text-xl font-bold mt-2 group-hover:text-primary transition-colors">
+                          <h3 className="text-xl font-bold mt-2 group-hover:text-primary transition-colors duration-300">
                             {item.title}
                           </h3>
                         </div>
@@ -166,7 +167,7 @@ export function Portfolio() {
         </Tabs>
 
         <Dialog open={!!selectedItem} onOpenChange={() => setSelectedItem(null)}>
-          <DialogContent className="max-w-3xl p-0 overflow-hidden bg-card border-border">
+          <DialogContent className="max-w-4xl p-0 overflow-hidden bg-card border-border shadow-2xl">
             {selectedItem && (
               <div className="animate-in fade-in-0 zoom-in-95 duration-300">
                 <DialogTitle className="sr-only">{selectedItem.title}</DialogTitle>
@@ -187,8 +188,8 @@ export function Portfolio() {
                         </CarouselItem>
                       ))}
                     </CarouselContent>
-                    <CarouselPrevious className="left-4" />
-                    <CarouselNext className="right-4" />
+                    <CarouselPrevious className="left-4 bg-background/80 hover:bg-background border-border" />
+                    <CarouselNext className="right-4 bg-background/80 hover:bg-background border-border" />
                   </Carousel>
                 ) : (
                   <div className="aspect-video relative">
@@ -201,14 +202,14 @@ export function Portfolio() {
                     />
                   </div>
                 )}
-                <div className="p-8">
-                  <span className="text-sm text-accent font-medium uppercase tracking-wider">
+                <div className="p-8 md:p-10">
+                  <span className="text-sm text-accent font-semibold uppercase tracking-wider">
                     {selectedItem.subtitle}
                   </span>
-                  <h3 className="text-2xl md:text-3xl font-bold mt-2 mb-4">
+                  <h3 className="text-2xl md:text-3xl font-bold mt-3 mb-4">
                     {selectedItem.title}
                   </h3>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <p className="text-muted-foreground leading-relaxed text-base">
                     {selectedItem.description}
                   </p>
                 </div>

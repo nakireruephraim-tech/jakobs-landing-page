@@ -21,8 +21,12 @@ export function Footer() {
   ]
 
   return (
-    <footer className="bg-secondary text-secondary-foreground py-16">
-      <div className="container mx-auto px-4 lg:px-8">
+    <footer className="bg-secondary text-secondary-foreground py-16 relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-1/4 w-72 h-72 bg-accent/5 rounded-full blur-3xl" />
+      
+      <div className="container mx-auto px-4 lg:px-8 relative z-10">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           <div>
             <Image src="/jakobs-logo-white.png" alt="Jakob's" width={120} height={40} className="h-8 w-auto mb-4" />
@@ -31,13 +35,13 @@ export function Footer() {
 
           {footerSections.map((section) => (
             <div key={section.title}>
-              <h4 className="font-bold mb-4">{section.title}</h4>
+              <h4 className="font-bold mb-4 text-lg">{section.title}</h4>
               <ul className="space-y-3">
                 {section.links.map((link) => (
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-secondary-foreground/70 hover:text-secondary-foreground transition-colors"
+                      className="text-secondary-foreground/70 hover:text-accent hover:translate-x-1 transition-all duration-300 inline-block"
                     >
                       {link.label}
                     </Link>
@@ -58,7 +62,7 @@ export function Footer() {
               <Link
                 key={social.label}
                 href={social.href}
-                className="text-secondary-foreground/70 hover:text-secondary-foreground transition-colors text-sm"
+                className="text-secondary-foreground/70 hover:text-accent transition-colors duration-300 text-sm"
               >
                 {social.label}
               </Link>

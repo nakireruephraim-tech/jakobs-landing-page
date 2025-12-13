@@ -23,19 +23,19 @@ export function Projects() {
           <p className="text-xl text-muted-foreground">{t.projects.sectionSubtitle}</p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {t.projects.projects.map((project, index) => {
             const card = (
               <Card
                 key={index}
-                className="p-6 bg-card border-border hover:border-primary/50 transition-all duration-300 group cursor-pointer"
+                className="card-shine p-6 bg-card border-border hover:border-primary/50 hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/5 transition-all duration-500 group cursor-pointer"
               >
                 <div className="flex items-start justify-between mb-4">
-                  <span className={`text-xs font-medium px-3 py-1 rounded-full ${tagColors[index]}`}>{project.tag}</span>
-                  <ExternalLink className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
+                  <span className={`text-xs font-medium px-3 py-1.5 rounded-full ${tagColors[index]} border border-current/20`}>{project.tag}</span>
+                  <ExternalLink className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:rotate-12 transition-all duration-300" />
                 </div>
-                <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">{project.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{project.description}</p>
+                <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors duration-300">{project.title}</h3>
+                <p className="text-muted-foreground leading-relaxed text-sm">{project.description}</p>
               </Card>
             )
 
