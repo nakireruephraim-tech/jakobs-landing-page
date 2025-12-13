@@ -1,20 +1,37 @@
 import { NextResponse } from "next/server"
 import { Resend } from "resend"
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+const resendApiKey = process.env.RESEND_API_KEY
+const resend = resendApiKey ? new Resend(resendApiKey) : null
 
 export async function POST(request: Request) {
   try {
-    const { name, email, service, message } = await request.json()
+    const body = await request.json().catch((err) => {
+      console.error("[contact] Failed to parse JSON body", err)
+      throw new Error("INVALID_JSON")
+    })
+
+    const { name, email, service, message } = body ?? {}
+
+    console.log("[contact] Incoming request", { name, email, service, hasMessage: !!message })
 
     if (!name || !email || !message) {
+      console.error("[contact] Missing required fields", { name, email, hasMessage: !!message })
       return NextResponse.json(
         { error: "Name, email, and message are required" },
-        { status: 400 }
+        { status: 400 },
       )
     }
 
-    const { error } = await resend.emails.send({
+    if (!resend) {
+      console.error("[contact] RESEND_API_KEY is missing. Cannot send email.")
+      return NextResponse.json(
+        { error: "Email service is not configured on the server (missing RESEND_API_KEY)." },
+        { status: 500 },
+      )
+    }
+
+    const result = await resend.emails.send({
       from: "Jakob's Contact Form <noreply@jakobs.studio>",
       to: ["contact@jakobs.studio"],
       replyTo: email,
@@ -25,21 +42,27 @@ export async function POST(request: Request) {
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Service Interested In:</strong> ${service || "Not specified"}</p>
         <p><strong>Message:</strong></p>
-        <p>${message.replace(/\n/g, "<br>")}</p>
+        <p>${String(message).replace(/\n/g, "<br>")}</p>
       `,
     })
 
-    if (error) {
-      console.error("Resend error:", error)
+    console.log("[contact] Resend response", result)
+
+    if (result.error) {
+      console.error("[contact] Resend error", result.error)
       return NextResponse.json(
-        { error: "Failed to send message" },
-        { status: 500 }
+        { error: `Failed to send message via Resend: ${result.error.message ?? "Unknown error"}` },
+        { status: 500 },
       )
     }
 
     return NextResponse.json({ success: true })
-  } catch (error) {
-    console.error("Contact form error:", error)
-    return NextResponse.json({ error: "Invalid request" }, { status: 400 })
+  } catch (error: unknown) {
+    if ((error as Error)?.message === "INVALID_JSON") {
+      return NextResponse.json({ error: "Invalid JSON in request" }, { status: 400 })
+    }
+
+    console.error("[contact] Unhandled error", error)
+    return NextResponse.json({ error: "Unexpected server error" }, { status: 500 })
   }
 }

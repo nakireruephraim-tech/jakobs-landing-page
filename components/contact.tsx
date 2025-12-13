@@ -13,13 +13,16 @@ export function Contact() {
   const { t } = useLanguage()
   const [isLoading, setIsLoading] = useState(false)
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle")
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setIsLoading(true)
     setStatus("idle")
+    setErrorMessage(null)
 
-    const formData = new FormData(e.currentTarget)
+    const form = e.currentTarget
+    const formData = new FormData(form)
     const data = {
       name: formData.get("name") as string,
       email: formData.get("email") as string,
@@ -36,11 +39,16 @@ export function Contact() {
 
       if (response.ok) {
         setStatus("success")
-        e.currentTarget.reset()
+        form.reset()
       } else {
+        const resBody = await response.json().catch(() => null)
+        console.error("[contact] Client received error response", response.status, resBody)
+        setErrorMessage(resBody?.error ?? "Unknown error from server")
         setStatus("error")
       }
-    } catch {
+    } catch (err) {
+      console.error("[contact] Client fetch error", err)
+      setErrorMessage("Network error while calling /api/contact")
       setStatus("error")
     } finally {
       setIsLoading(false)
@@ -139,7 +147,7 @@ export function Contact() {
               )}
               {status === "error" && (
                 <p className="text-sm text-red-500 text-center animate-fade-in">
-                  Something went wrong. Please try again or email us directly.
+                  {errorMessage ?? "Something went wrong. Please try again or email us directly."}
                 </p>
               )}
             </form>
