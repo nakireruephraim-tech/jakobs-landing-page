@@ -4,7 +4,7 @@ import { useState } from "react"
 import Image from "next/image"
 import { Card } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Dialog, DialogContent } from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 import {
   Carousel,
   CarouselContent,
@@ -72,16 +72,18 @@ export function Portfolio() {
       description: "A promise of expertise, of hard work and hard-earned fresh fish and seafood. We needed to represent the bonds that Mersea is building through its service - connecting the people of Mauritius into a network of handpicked and honest quality.",
     },
     {
-      images: ["/portfolio/Screenshot 2025-12-14 at 00.03.39.png"],
-      title: "Beau Plan",
-      subtitle: "Souvenir Campaign (Alt)",
-      description: "Additional campaign visuals extending the Beau Plan souvenir story across formats, reinforcing the same cohesive experience with alternate compositions and layouts.",
+      images: ["/portfolio/Screenshot 2025-12-14 at 00.05.21.png"],
+      title: "Out of Office",
+      subtitle: "Rogers Hospitality Magazine",
+      description:
+        "Rogers Hospitality's annual magazine 'Out of Office' aims to deliver an aperçu of the island to tourists and visitors. We mixed traditional tropical paintings with textures and beautiful imagery to portray the island in this handy pocket-sized magazine.",
     },
     {
       images: ["/portfolio/Screenshot 2025-12-14 at 00.04.13.png"],
-      title: "Phoenix Beer",
-      subtitle: "Euro 2024 Campaign (Alt)",
-      description: "Alternate key visual explorations for the Euro Fiesta campaign, maintaining the energetic look and feel while adapting compositions for different channels and placements.",
+      title: "SBM",
+      subtitle: "Annual Report",
+      description:
+        "For the SBM Integrated Report themed 'Embarking on a sustainable & purposeful journey,' this design proposal integrates 10 thematic dividers showcasing SBM's tangible actions towards sustainability, complemented by personal testimonials. The SBM icon transforms into a window revealing the bank's role as an enabler of sustainable futures, blending impactful narratives with innovative design.",
     },
   ]
 
@@ -167,6 +169,7 @@ export function Portfolio() {
           <DialogContent className="max-w-3xl p-0 overflow-hidden bg-card border-border">
             {selectedItem && (
               <div className="animate-in fade-in-0 zoom-in-95 duration-300">
+                <DialogTitle className="sr-only">{selectedItem.title}</DialogTitle>
                 {selectedItem.images.length > 1 ? (
                   <Carousel className="w-full">
                     <CarouselContent>
