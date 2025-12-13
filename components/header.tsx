@@ -34,7 +34,9 @@ export function Header() {
 
           <div className="flex items-center gap-3">
             <LanguageSwitcher />
-            <Button className="bg-accent text-accent-foreground hover:bg-accent/90">{t.hero.primaryCta}</Button>
+            <Link href="#contact">
+              <Button className="bg-accent text-accent-foreground hover:bg-accent/90">{t.hero.primaryCta}</Button>
+            </Link>
           </div>
         </div>
       </div>

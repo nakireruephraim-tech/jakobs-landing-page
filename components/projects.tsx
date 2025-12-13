@@ -13,6 +13,7 @@ const tagColors = [
 
 export function Projects() {
   const { t } = useLanguage()
+  const pigbyUrl = process.env.NEXT_PUBLIC_PIGBY_URL ?? "https://pigby.io"
 
   return (
     <section id="projects" className="py-24">
@@ -24,7 +25,7 @@ export function Projects() {
 
         <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {t.projects.projects.map((project, index) => {
-            const content = (
+            const card = (
               <Card
                 key={index}
                 className="p-6 bg-card border-border hover:border-primary/50 transition-all duration-300 group cursor-pointer"
@@ -38,15 +39,25 @@ export function Projects() {
               </Card>
             )
 
-            if (index === 1) {
+            // Pigby.io is the first project
+            if (index === 0) {
               return (
-                <Link key={index} href="/brand" className="block">
-                  {content}
+                <Link key={index} href={pigbyUrl} target="_blank" rel="noreferrer" className="block">
+                  {card}
                 </Link>
               )
             }
 
-            return content
+            // Jakob's Brand Identity is the second project
+            if (index === 1) {
+              return (
+                <Link key={index} href="/brand" className="block">
+                  {card}
+                </Link>
+              )
+            }
+
+            return card
           })}
         </div>
       </div>

@@ -29,10 +29,12 @@ export function Hero() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
-            <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 group">
-              {t.hero.primaryCta}
-              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-            </Button>
+            <a href="#contact">
+              <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 group">
+                {t.hero.primaryCta}
+                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </a>
             <Button size="lg" variant="outline" className="border-primary/20 hover:bg-primary/10 bg-transparent">
               {t.hero.secondaryCta}
             </Button>

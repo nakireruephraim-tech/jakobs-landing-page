@@ -192,7 +192,7 @@ export const translations: Record<Language, Translations> = {
     portfolio: {
       sectionTitle: "Portfolio",
       sectionSubtitle: "A showcase of our creative work",
-      tabs: { graphic: "Graphic Design", video: "Video Editing", motion: "Motion Design" },
+      tabs: { graphic: "Graphics", video: "Video", motion: "Software" },
       graphic: [
         { title: "Brand Identity Kit", category: "Branding" },
         { title: "Social Media Campaign", category: "Social" },
@@ -329,7 +329,7 @@ export const translations: Record<Language, Translations> = {
     portfolio: {
       sectionTitle: "Portafolio",
       sectionSubtitle: "Una muestra de nuestro trabajo creativo",
-      tabs: { graphic: "Diseño Gráfico", video: "Edición de Video", motion: "Diseño de Movimiento" },
+      tabs: { graphic: "Gráficos", video: "Video", motion: "Software" },
       graphic: [
         { title: "Kit de Identidad de Marca", category: "Branding" },
         { title: "Campaña de Redes Sociales", category: "Social" },
@@ -466,7 +466,7 @@ export const translations: Record<Language, Translations> = {
     portfolio: {
       sectionTitle: "Portfolio",
       sectionSubtitle: "Une vitrine de notre travail créatif",
-      tabs: { graphic: "Design Graphique", video: "Montage Vidéo", motion: "Motion Design" },
+      tabs: { graphic: "Graphisme", video: "Vidéo", motion: "Logiciel" },
       graphic: [
         { title: "Kit d'Identité de Marque", category: "Branding" },
         { title: "Campagne Réseaux Sociaux", category: "Social" },
@@ -603,7 +603,7 @@ export const translations: Record<Language, Translations> = {
     portfolio: {
       sectionTitle: "作品集",
       sectionSubtitle: "我们创意作品的展示",
-      tabs: { graphic: "平面设计", video: "视频剪辑", motion: "动效设计" },
+      tabs: { graphic: "图形", video: "视频", motion: "软件" },
       graphic: [
         { title: "品牌标识套件", category: "品牌" },
         { title: "社交媒体活动", category: "社交" },
