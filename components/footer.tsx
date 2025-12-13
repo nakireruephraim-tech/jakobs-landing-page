@@ -1,24 +1,8 @@
+"use client"
+
 import Link from "next/link"
 import Image from "next/image"
-
-const footerLinks = {
-  "About Jakob's": [
-    { label: "Our Story", href: "#" },
-    { label: "Core Values", href: "#" },
-    { label: "Vision", href: "#" },
-  ],
-  Services: [
-    { label: "Software Development", href: "#services" },
-    { label: "AI Solutions", href: "#services" },
-    { label: "Content Creation", href: "#portfolio" },
-    { label: "Digital Marketing", href: "#services" },
-  ],
-  Contact: [
-    { label: "hello@jakobs.studio", href: "mailto:hello@jakobs.studio" },
-    { label: "Mauritius", href: "#" },
-    { label: "Work with us", href: "#contact" },
-  ],
-}
+import { useLanguage } from "@/lib/i18n/LanguageContext"
 
 const socials = [
   { label: "Twitter", href: "#" },
@@ -28,20 +12,28 @@ const socials = [
 ]
 
 export function Footer() {
+  const { t } = useLanguage()
+
+  const footerSections = [
+    { title: t.footer.aboutTitle, links: t.footer.aboutLinks },
+    { title: t.footer.servicesTitle, links: t.footer.servicesLinks },
+    { title: t.footer.contactTitle, links: t.footer.contactLinks },
+  ]
+
   return (
     <footer className="bg-secondary text-secondary-foreground py-16">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           <div>
             <Image src="/jakobs-logo-white.png" alt="Jakob's" width={120} height={40} className="h-8 w-auto mb-4" />
-            <p className="text-secondary-foreground/70 leading-relaxed">Built in Africa. Powered by innovation.</p>
+            <p className="text-secondary-foreground/70 leading-relaxed">{t.footer.tagline}</p>
           </div>
 
-          {Object.entries(footerLinks).map(([title, links]) => (
-            <div key={title}>
-              <h4 className="font-bold mb-4">{title}</h4>
+          {footerSections.map((section) => (
+            <div key={section.title}>
+              <h4 className="font-bold mb-4">{section.title}</h4>
               <ul className="space-y-3">
-                {links.map((link) => (
+                {section.links.map((link) => (
                   <li key={link.label}>
                     <Link
                       href={link.href}
@@ -58,7 +50,7 @@ export function Footer() {
 
         <div className="border-t border-secondary-foreground/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-secondary-foreground/70 text-sm">
-            © {new Date().getFullYear()} Jakob's. All rights reserved.
+            {t.footer.copyright}
           </p>
 
           <div className="flex gap-6">

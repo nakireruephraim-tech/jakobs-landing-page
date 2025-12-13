@@ -3,8 +3,10 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { useLanguage } from "@/lib/i18n/LanguageContext"
 
 export function Newsletter() {
+  const { t } = useLanguage()
   const [email, setEmail] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [message, setMessage] = useState<string | null>(null)
@@ -44,16 +46,14 @@ export function Newsletter() {
     <section className="py-16 bg-primary">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="max-w-3xl mx-auto text-center space-y-6">
-          <h3 className="text-2xl md:text-3xl font-bold text-primary-foreground">
-            Stay ahead with insights on AI, design, and creativity.
-          </h3>
+          <h3 className="text-2xl md:text-3xl font-bold text-primary-foreground">{t.newsletter.title}</h3>
 
           <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
             <Input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
+              placeholder={t.newsletter.placeholder}
               required
               className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/60"
             />
@@ -62,11 +62,11 @@ export function Newsletter() {
               disabled={isLoading}
               className="bg-accent text-accent-foreground hover:bg-accent/90 flex-shrink-0"
             >
-              {isLoading ? "Subscribing..." : "Subscribe"}
+              {isLoading ? t.newsletter.subscribing : t.newsletter.subscribe}
             </Button>
           </form>
-          {message && <p className="text-sm text-primary-foreground/80">{message}</p>}
-          {error && <p className="text-sm text-red-200">{error}</p>}
+          {message && <p className="text-sm text-primary-foreground/80">{t.newsletter.success}</p>}
+          {error && <p className="text-sm text-red-200">{t.newsletter.error}</p>}
         </div>
       </div>
     </section>

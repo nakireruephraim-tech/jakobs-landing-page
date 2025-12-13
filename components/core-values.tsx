@@ -1,50 +1,24 @@
-import { Heart, Users, Clock, Shield, Target, Landmark } from "lucide-react"
+"use client"
 
-const values = [
-  {
-    icon: Heart,
-    title: "Beauty",
-    description: "Thoughtfully designed experiences",
-  },
-  {
-    icon: Users,
-    title: "Loyalty",
-    description: "Long-lasting relationships",
-  },
-  {
-    icon: Clock,
-    title: "Longevity",
-    description: "Solutions built to endure",
-  },
-  {
-    icon: Shield,
-    title: "Truth",
-    description: "Transparency and integrity",
-  },
-  {
-    icon: Target,
-    title: "Discipline",
-    description: "Focused execution",
-  },
-  {
-    icon: Landmark,
-    title: "Heritage",
-    description: "Honoring our roots while innovating",
-  },
-]
+import { Heart, Users, Clock, Shield, Target, Landmark } from "lucide-react"
+import { useLanguage } from "@/lib/i18n/LanguageContext"
+
+const icons = [Heart, Users, Clock, Shield, Target, Landmark]
 
 export function CoreValues() {
+  const { t } = useLanguage()
+
   return (
     <section className="py-24">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Our Core Values</h2>
-          <p className="text-xl text-muted-foreground">The principles that guide everything we do</p>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">{t.coreValues.sectionTitle}</h2>
+          <p className="text-xl text-muted-foreground">{t.coreValues.sectionSubtitle}</p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {values.map((value, index) => {
-            const Icon = value.icon
+          {t.coreValues.values.map((value, index) => {
+            const Icon = icons[index]
             return (
               <div key={index} className="space-y-4">
                 <div className="w-12 h-12 rounded-lg bg-accent/20 flex items-center justify-center">

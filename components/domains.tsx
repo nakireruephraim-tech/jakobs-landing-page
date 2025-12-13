@@ -1,31 +1,36 @@
+"use client"
+
 import { Card } from "@/components/ui/card"
 import { Code, Video, TrendingUp } from "lucide-react"
-
-const domains = [
-  {
-    icon: Code,
-    title: "Software, IT & AI Solutions",
-    description: "Building powerful applications with cutting-edge technology",
-  },
-  {
-    icon: Video,
-    title: "Content Creation, Media & Entertainment",
-    description: "Crafting compelling stories through design and video",
-  },
-  {
-    icon: TrendingUp,
-    title: "Marketing",
-    description: "Growing brands with strategic digital campaigns",
-  },
-]
+import { useLanguage } from "@/lib/i18n/LanguageContext"
 
 export function Domains() {
+  const { t } = useLanguage()
+
+  const domains = [
+    {
+      icon: Code,
+      title: t.domains.software.title,
+      description: t.domains.software.description,
+    },
+    {
+      icon: Video,
+      title: t.domains.content.title,
+      description: t.domains.content.description,
+    },
+    {
+      icon: TrendingUp,
+      title: t.domains.marketing.title,
+      description: t.domains.marketing.description,
+    },
+  ]
+
   return (
     <section className="py-24 relative">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">What We Do</h2>
-          <p className="text-xl text-muted-foreground">Three powerful domains. One unified creative force.</p>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">{t.domains.sectionTitle}</h2>
+          <p className="text-xl text-muted-foreground">{t.domains.sectionSubtitle}</p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-6">
