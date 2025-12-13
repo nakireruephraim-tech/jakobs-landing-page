@@ -99,7 +99,6 @@ export function Contact() {
                   id="service"
                   name="service"
                   placeholder={t.contact.form.servicePlaceholder}
-                  defaultValue="Brand identity, website and content production"
                   className="bg-background border-border focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all duration-300"
                 />
               </div>
@@ -111,15 +110,6 @@ export function Contact() {
                   name="message"
                   required
                   placeholder={t.contact.form.messagePlaceholder}
-                  defaultValue={
-                    "Hi Jakob's team,\n\n" +
-                    "I'm interested in working with you on a new project. Here's a quick overview:\n\n" +
-                    "- Company / project:\n" +
-                    "- What we need help with:\n" +
-                    "- Ideal timeline:\n" +
-                    "- Budget range:\n\n" +
-                    "Looking forward to hearing from you!"
-                  }
                   className="bg-background border-border min-h-32 focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all duration-300 resize-none"
                 />
               </div>
