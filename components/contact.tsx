@@ -72,10 +72,10 @@ export function Contact() {
                 <div>
                   <p className="font-medium mb-1">{t.contact.info.emailLabel}</p>
                   <a
-                    href="mailto:hello@jakobs.studio"
+                    href="mailto:contact@jakobs.studio"
                     className="text-muted-foreground hover:text-primary transition-colors"
                   >
-                    hello@jakobs.studio
+                    contact@jakobs.studio
                   </a>
                 </div>
               </div>

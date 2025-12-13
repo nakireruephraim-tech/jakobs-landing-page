@@ -260,7 +260,7 @@ export const translations: Record<Language, Translations> = {
       ],
       contactTitle: "Contact",
       contactLinks: [
-        { label: "hello@jakobs.studio", href: "mailto:hello@jakobs.studio" },
+        { label: "contact@jakobs.studio", href: "mailto:contact@jakobs.studio" },
         { label: "Mauritius", href: "#" },
         { label: "Work with us", href: "#contact" },
       ],
@@ -397,7 +397,7 @@ export const translations: Record<Language, Translations> = {
       ],
       contactTitle: "Contacto",
       contactLinks: [
-        { label: "hello@jakobs.studio", href: "mailto:hello@jakobs.studio" },
+        { label: "contact@jakobs.studio", href: "mailto:contact@jakobs.studio" },
         { label: "Mauricio", href: "#" },
         { label: "Trabaja con nosotros", href: "#contact" },
       ],
@@ -534,7 +534,7 @@ export const translations: Record<Language, Translations> = {
       ],
       contactTitle: "Contact",
       contactLinks: [
-        { label: "hello@jakobs.studio", href: "mailto:hello@jakobs.studio" },
+        { label: "contact@jakobs.studio", href: "mailto:contact@jakobs.studio" },
         { label: "Maurice", href: "#" },
         { label: "Travaillez avec nous", href: "#contact" },
       ],
@@ -671,7 +671,7 @@ export const translations: Record<Language, Translations> = {
       ],
       contactTitle: "联系方式",
       contactLinks: [
-        { label: "hello@jakobs.studio", href: "mailto:hello@jakobs.studio" },
+        { label: "contact@jakobs.studio", href: "mailto:contact@jakobs.studio" },
         { label: "毛里求斯", href: "#" },
         { label: "与我们合作", href: "#contact" },
       ],
