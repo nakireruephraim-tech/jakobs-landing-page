@@ -1,8 +1,6 @@
 import { Hero } from "@/components/hero"
 import { Domains } from "@/components/domains"
 import { Services } from "@/components/services"
-import { CoreValues } from "@/components/core-values"
-import { Vision } from "@/components/vision"
 import { Projects } from "@/components/projects"
 import { Portfolio } from "@/components/portfolio"
 import { Contact } from "@/components/contact"
@@ -17,8 +15,6 @@ export default function Page() {
       <Hero />
       <Domains />
       <Services />
-      <CoreValues />
-      <Vision />
       <Projects />
       <Portfolio />
       <Contact />

@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { Card } from "@/components/ui/card"
 import { ExternalLink } from "lucide-react"
 import { useLanguage } from "@/lib/i18n/LanguageContext"
@@ -22,19 +23,31 @@ export function Projects() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {t.projects.projects.map((project, index) => (
-            <Card
-              key={index}
-              className="p-6 bg-card border-border hover:border-primary/50 transition-all duration-300 group cursor-pointer"
-            >
-              <div className="flex items-start justify-between mb-4">
-                <span className={`text-xs font-medium px-3 py-1 rounded-full ${tagColors[index]}`}>{project.tag}</span>
-                <ExternalLink className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
-              </div>
-              <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">{project.title}</h3>
-              <p className="text-muted-foreground leading-relaxed">{project.description}</p>
-            </Card>
-          ))}
+          {t.projects.projects.map((project, index) => {
+            const content = (
+              <Card
+                key={index}
+                className="p-6 bg-card border-border hover:border-primary/50 transition-all duration-300 group cursor-pointer"
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <span className={`text-xs font-medium px-3 py-1 rounded-full ${tagColors[index]}`}>{project.tag}</span>
+                  <ExternalLink className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
+                </div>
+                <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">{project.title}</h3>
+                <p className="text-muted-foreground leading-relaxed">{project.description}</p>
+              </Card>
+            )
+
+            if (index === 1) {
+              return (
+                <Link key={index} href="/brand" className="block">
+                  {content}
+                </Link>
+              )
+            }
+
+            return content
+          })}
         </div>
       </div>
     </section>
