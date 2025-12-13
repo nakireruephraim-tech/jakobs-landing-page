@@ -35,9 +35,11 @@ export function Hero() {
                 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Button>
             </a>
-            <Button size="lg" variant="outline" className="border-primary/20 hover:bg-primary/10 bg-transparent">
-              {t.hero.secondaryCta}
-            </Button>
+            <a href="#newsletter">
+              <Button size="lg" variant="outline" className="border-primary/20 hover:bg-primary/10 bg-transparent">
+                {t.hero.secondaryCta}
+              </Button>
+            </a>
           </div>
         </div>
       </div>

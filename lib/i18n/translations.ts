@@ -139,7 +139,7 @@ export const translations: Record<Language, Translations> = {
       portfolio: "Portfolio",
     },
     hero: {
-      badge: "Built in Africa. Powered by innovation.",
+      badge: "Built by Africa, accelerated through AI.",
       title: "Jakob's is a creative studio built by AI-native developers and creators.",
       subtitle: "We build apps, create content, and push the boundaries of what's possible with AI.",
       primaryCta: "Start a Project",
@@ -186,7 +186,7 @@ export const translations: Record<Language, Translations> = {
       projects: [
         { title: "Pigby.io", description: "A powerful money tracker to help you manage your finances with ease", tag: "Live" },
         { title: "Jakob's Brand Identity", description: "The beginning of our creative universe—a complete visual system", tag: "Completed" },
-        { title: "AI Content Studio", description: "Revolutionary platform for AI-powered content creation", tag: "Coming Soon" },
+        { title: "AI Solutions", description: "AI-powered solutions for automation, assistants and workflows", tag: "Coming Soon" },
       ],
     },
     portfolio: {
@@ -243,7 +243,7 @@ export const translations: Record<Language, Translations> = {
       error: "Something went wrong. Please try again.",
     },
     footer: {
-      tagline: "Built in Africa. Powered by innovation.",
+      tagline: "Built by Africa, accelerated through AI.",
       copyright: "© Jakob's. All rights reserved.",
       aboutTitle: "About Jakob's",
       aboutLinks: [
@@ -323,7 +323,7 @@ export const translations: Record<Language, Translations> = {
       projects: [
         { title: "Pigby.io", description: "Un potente rastreador de dinero para ayudarte a gestionar tus finanzas con facilidad", tag: "En vivo" },
         { title: "Identidad de Marca Jakob's", description: "El comienzo de nuestro universo creativo—un sistema visual completo", tag: "Completado" },
-        { title: "Estudio de Contenido IA", description: "Plataforma revolucionaria para la creación de contenido impulsada por IA", tag: "Próximamente" },
+        { title: "Soluciones de IA", description: "Soluciones impulsadas por IA para automatización, asistentes y flujos de trabajo", tag: "Próximamente" },
       ],
     },
     portfolio: {
@@ -460,7 +460,7 @@ export const translations: Record<Language, Translations> = {
       projects: [
         { title: "Pigby.io", description: "Un puissant outil de suivi financier pour gérer vos finances facilement", tag: "En ligne" },
         { title: "Identité de Marque Jakob's", description: "Le début de notre univers créatif—un système visuel complet", tag: "Terminé" },
-        { title: "Studio de Contenu IA", description: "Plateforme révolutionnaire pour la création de contenu alimentée par l'IA", tag: "Bientôt" },
+        { title: "Solutions IA", description: "Solutions alimentées par l'IA pour l'automatisation, les assistants et les flux de travail", tag: "Bientôt" },
       ],
     },
     portfolio: {
@@ -597,7 +597,7 @@ export const translations: Record<Language, Translations> = {
       projects: [
         { title: "Pigby.io", description: "一款强大的财务追踪工具，帮助您轻松管理财务", tag: "已上线" },
         { title: "Jakob's 品牌标识", description: "我们创意宇宙的开端——一套完整的视觉系统", tag: "已完成" },
-        { title: "AI 内容工作室", description: "革命性的 AI 驱动内容创作平台", tag: "即将推出" },
+        { title: "AI 解决方案", description: "面向自动化、助手和工作流的 AI 驱动解决方案", tag: "即将推出" },
       ],
     },
     portfolio: {

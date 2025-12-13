@@ -25,7 +25,7 @@ export function Header() {
               {t.nav.projects}
             </Link>
             <Link href="#portfolio" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              {t.nav.projects}
+              {t.nav.portfolio}
             </Link>
             <Link href="#contact" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               {t.nav.contact}

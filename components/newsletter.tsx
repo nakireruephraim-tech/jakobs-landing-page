@@ -43,7 +43,7 @@ export function Newsletter() {
   }
 
   return (
-    <section className="py-16 bg-primary">
+    <section id="newsletter" className="py-16 bg-primary">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="max-w-3xl mx-auto text-center space-y-6">
           <h3 className="text-2xl md:text-3xl font-bold text-primary-foreground">{t.newsletter.title}</h3>

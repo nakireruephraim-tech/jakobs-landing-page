@@ -18,7 +18,7 @@ export function Services() {
         </div>
 
         <Tabs defaultValue="software" className="max-w-5xl mx-auto">
-          <TabsList className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 h-auto bg-transparent">
+          <TabsList className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 h-auto bg-transparent max-w-3xl mx-auto">
             <TabsTrigger
               value="software"
               className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
