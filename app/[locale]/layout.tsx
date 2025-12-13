@@ -2,8 +2,6 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
-import { NextIntlClientProvider } from "next-intl"
-import { getMessages } from "next-intl/server"
 import { notFound } from "next/navigation"
 import { routing } from "@/i18n/routing"
 import "../globals.css"
@@ -50,16 +48,11 @@ export default async function RootLayout({
     notFound()
   }
 
-  // Providing all messages to the client side is the easiest way to get started
-  const messages = await getMessages()
-
   return (
     <html lang={locale}>
       <body className={`font-sans antialiased`}>
-        <NextIntlClientProvider messages={messages} locale={locale} timeZone="UTC">
-          {children}
-          <Analytics />
-        </NextIntlClientProvider>
+        {children}
+        <Analytics />
       </body>
     </html>
   )
