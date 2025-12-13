@@ -71,6 +71,18 @@ export function Portfolio() {
       subtitle: "Fish and Seafood Store",
       description: "A promise of expertise, of hard work and hard-earned fresh fish and seafood. We needed to represent the bonds that Mersea is building through its service - connecting the people of Mauritius into a network of handpicked and honest quality.",
     },
+    {
+      images: ["/portfolio/Screenshot 2025-12-14 at 00.03.39.png"],
+      title: "Beau Plan",
+      subtitle: "Souvenir Campaign (Alt)",
+      description: "Additional campaign visuals extending the Beau Plan souvenir story across formats, reinforcing the same cohesive experience with alternate compositions and layouts.",
+    },
+    {
+      images: ["/portfolio/Screenshot 2025-12-14 at 00.04.13.png"],
+      title: "Phoenix Beer",
+      subtitle: "Euro 2024 Campaign (Alt)",
+      description: "Alternate key visual explorations for the Euro Fiesta campaign, maintaining the energetic look and feel while adapting compositions for different channels and placements.",
+    },
   ]
 
   return (
