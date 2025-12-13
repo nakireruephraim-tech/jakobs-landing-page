@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { Card } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useLanguage } from "@/lib/i18n/LanguageContext"
@@ -8,6 +9,17 @@ export function Portfolio() {
   const { t } = useLanguage()
 
   const portfolioKeys = ["graphic", "video", "motion"] as const
+
+  const graphicImages = [
+    "/portfolio/Screenshot 2025-12-13 at 23.59.24.png",
+    "/portfolio/Screenshot 2025-12-13 at 23.59.53.png",
+    "/portfolio/Screenshot 2025-12-14 at 00.00.26.png",
+    "/portfolio/Screenshot 2025-12-14 at 00.01.12.png",
+    "/portfolio/Screenshot 2025-12-14 at 00.01.34.png",
+    "/portfolio/Screenshot 2025-12-14 at 00.02.13.png",
+    "/portfolio/Screenshot 2025-12-14 at 00.02.39.png",
+    "/portfolio/Screenshot 2025-12-14 at 00.03.20.png",
+  ]
 
   return (
     <section id="portfolio" className="py-24 bg-muted/30">
@@ -42,22 +54,48 @@ export function Portfolio() {
           {portfolioKeys.map((key) => (
             <TabsContent key={key} value={key}>
               <div className="grid md:grid-cols-2 gap-6">
-                {t.portfolio[key].map((item, index) => (
-                  <Card
-                    key={index}
-                    className="group overflow-hidden bg-card border-border hover:border-accent transition-all duration-300 cursor-pointer"
-                  >
-                    <div className="aspect-video bg-gradient-to-br from-primary/20 to-accent/10 relative overflow-hidden">
-                      <div className="absolute inset-0 bg-primary/10 group-hover:bg-primary/20 transition-colors" />
-                    </div>
-                    <div className="p-6">
-                      <span className="text-xs text-accent font-medium">{item.category}</span>
-                      <h3 className="text-xl font-bold mt-2 group-hover:text-primary transition-colors">
-                        {item.title}
-                      </h3>
-                    </div>
-                  </Card>
-                ))}
+                {key === "graphic"
+                  ? graphicImages.map((src, index) => {
+                      const item = t.portfolio.graphic[index % t.portfolio.graphic.length]
+                      return (
+                        <Card
+                          key={index}
+                          className="group overflow-hidden bg-card border-border hover:border-accent transition-all duration-300 cursor-pointer"
+                        >
+                          <div className="aspect-video relative overflow-hidden">
+                            <Image
+                              src={src}
+                              alt={item.title}
+                              fill
+                              className="object-cover group-hover:scale-105 transition-transform duration-500"
+                              sizes="(min-width: 768px) 50vw, 100vw"
+                            />
+                          </div>
+                          <div className="p-6">
+                            <span className="text-xs text-accent font-medium">{item.category}</span>
+                            <h3 className="text-xl font-bold mt-2 group-hover:text-primary transition-colors">
+                              {item.title}
+                            </h3>
+                          </div>
+                        </Card>
+                      )
+                    })
+                  : t.portfolio[key].map((item, index) => (
+                      <Card
+                        key={index}
+                        className="group overflow-hidden bg-card border-border hover:border-accent transition-all duration-300 cursor-pointer"
+                      >
+                        <div className="aspect-video relative overflow-hidden">
+                          <div className="w-full h-full bg-gradient-to-br from-primary/20 to-accent/10" />
+                        </div>
+                        <div className="p-6">
+                          <span className="text-xs text-accent font-medium">{item.category}</span>
+                          <h3 className="text-xl font-bold mt-2 group-hover:text-primary transition-colors">
+                            {item.title}
+                          </h3>
+                        </div>
+                      </Card>
+                    ))}
               </div>
             </TabsContent>
           ))}
