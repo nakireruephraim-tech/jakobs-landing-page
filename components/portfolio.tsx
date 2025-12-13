@@ -1,24 +1,76 @@
 "use client"
 
+import { useState } from "react"
 import Image from "next/image"
 import { Card } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Dialog, DialogContent } from "@/components/ui/dialog"
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+} from "@/components/ui/carousel"
 import { useLanguage } from "@/lib/i18n/LanguageContext"
+
+interface GraphicItem {
+  images: string[]
+  title: string
+  subtitle: string
+  description: string
+}
 
 export function Portfolio() {
   const { t } = useLanguage()
 
   const portfolioKeys = ["graphic", "video", "motion"] as const
 
-  const graphicImages = [
-    "/portfolio/Screenshot 2025-12-13 at 23.59.24.png",
-    "/portfolio/Screenshot 2025-12-13 at 23.59.53.png",
-    "/portfolio/Screenshot 2025-12-14 at 00.00.26.png",
-    "/portfolio/Screenshot 2025-12-14 at 00.01.12.png",
-    "/portfolio/Screenshot 2025-12-14 at 00.01.34.png",
-    "/portfolio/Screenshot 2025-12-14 at 00.02.13.png",
-    "/portfolio/Screenshot 2025-12-14 at 00.02.39.png",
-    "/portfolio/Screenshot 2025-12-14 at 00.03.20.png",
+  const [selectedItem, setSelectedItem] = useState<GraphicItem | null>(null)
+
+  const graphicItems: GraphicItem[] = [
+    {
+      images: ["/portfolio/Screenshot 2025-12-13 at 23.59.24.png"],
+      title: "Beau Plan",
+      subtitle: "Souvenir Campaign",
+      description: "We developed the key visuals that capture the essence of the brand and its offerings. This included creating a cohesive suite of print and digital assets to effectively communicate the campaign's message across various channels, fostering a connection to the Beau Plan experience.",
+    },
+    {
+      images: ["/portfolio/Screenshot 2025-12-13 at 23.59.53.png"],
+      title: "Phoenix Beer",
+      subtitle: "Euro 2024 Campaign",
+      description: "For the Euro Fiesta campaign, we created the key visuals that encapsulate the vibrant spirit of the event. This involved developing a cohesive range of print and digital assets to effectively promote the campaign across various platforms. The design elements were tailored to engage audiences and enhance the overall festive experience.",
+    },
+    {
+      images: [
+        "/portfolio/Screenshot 2025-12-14 at 00.00.26.png",
+        "/portfolio/Screenshot 2025-12-14 at 00.01.12.png",
+      ],
+      title: "Diageo",
+      subtitle: "Spirits Club",
+      description: "The brand identity design for The Perfect Blend embodies the essence of sophistication and exclusivity. Through an elegant interplay of visuals, it encapsulates the refined world of spirits, celebrating the artistry of blending not only in taste but also in community, where diverse backgrounds converge into a seamless tapestry of shared passion and elevated experiences.",
+    },
+    {
+      images: [
+        "/portfolio/Screenshot 2025-12-14 at 00.01.34.png",
+        "/portfolio/Screenshot 2025-12-14 at 00.02.13.png",
+      ],
+      title: "Syndicate",
+      subtitle: "Esports",
+      description: "Syndicate is a League of Legends esport team. It is a team of rebels and we needed the branding to establish the youthful spirit.",
+    },
+    {
+      images: ["/portfolio/Screenshot 2025-12-14 at 00.02.39.png"],
+      title: "Ukiyo",
+      subtitle: "Cafe",
+      description: "Ukiyo is the cafe specifically catered for fans of gaming and anime in Mauritius. These are the people who keep their interests to themselves, but Ukiyo is here to provide them with the platform for them to interact with people who share the same interests. We represented the brand as being an outline on the outside - similarly to how the demographic is perceived. On the inside however, their true colours emerge.",
+    },
+    {
+      images: ["/portfolio/Screenshot 2025-12-14 at 00.03.20.png"],
+      title: "Mersea",
+      subtitle: "Fish and Seafood Store",
+      description: "A promise of expertise, of hard work and hard-earned fresh fish and seafood. We needed to represent the bonds that Mersea is building through its service - connecting the people of Mauritius into a network of handpicked and honest quality.",
+    },
   ]
 
   return (
@@ -55,31 +107,29 @@ export function Portfolio() {
             <TabsContent key={key} value={key}>
               <div className="grid md:grid-cols-2 gap-6">
                 {key === "graphic"
-                  ? graphicImages.map((src, index) => {
-                      const item = t.portfolio.graphic[index % t.portfolio.graphic.length]
-                      return (
-                        <Card
-                          key={index}
-                          className="group overflow-hidden bg-card border-border hover:border-accent transition-all duration-300 cursor-pointer"
-                        >
-                          <div className="aspect-video relative overflow-hidden">
-                            <Image
-                              src={src}
-                              alt={item.title}
-                              fill
-                              className="object-cover group-hover:scale-105 transition-transform duration-500"
-                              sizes="(min-width: 768px) 50vw, 100vw"
-                            />
-                          </div>
-                          <div className="p-6">
-                            <span className="text-xs text-accent font-medium">{item.category}</span>
-                            <h3 className="text-xl font-bold mt-2 group-hover:text-primary transition-colors">
-                              {item.title}
-                            </h3>
-                          </div>
-                        </Card>
-                      )
-                    })
+                  ? graphicItems.map((item, index) => (
+                      <Card
+                        key={index}
+                        className="group overflow-hidden bg-card border-border hover:border-accent transition-all duration-300 cursor-pointer"
+                        onClick={() => setSelectedItem(item)}
+                      >
+                        <div className="aspect-video relative overflow-hidden">
+                          <Image
+                            src={item.images[0]}
+                            alt={item.title}
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform duration-500"
+                            sizes="(min-width: 768px) 50vw, 100vw"
+                          />
+                        </div>
+                        <div className="p-6">
+                          <span className="text-xs text-accent font-medium uppercase tracking-wider">{item.subtitle}</span>
+                          <h3 className="text-xl font-bold mt-2 group-hover:text-primary transition-colors">
+                            {item.title}
+                          </h3>
+                        </div>
+                      </Card>
+                    ))
                   : t.portfolio[key].map((item, index) => (
                       <Card
                         key={index}
@@ -100,6 +150,57 @@ export function Portfolio() {
             </TabsContent>
           ))}
         </Tabs>
+
+        <Dialog open={!!selectedItem} onOpenChange={() => setSelectedItem(null)}>
+          <DialogContent className="max-w-3xl p-0 overflow-hidden bg-card border-border">
+            {selectedItem && (
+              <div className="animate-in fade-in-0 zoom-in-95 duration-300">
+                {selectedItem.images.length > 1 ? (
+                  <Carousel className="w-full">
+                    <CarouselContent>
+                      {selectedItem.images.map((img, idx) => (
+                        <CarouselItem key={idx}>
+                          <div className="aspect-video relative">
+                            <Image
+                              src={img}
+                              alt={`${selectedItem.title} - ${idx + 1}`}
+                              fill
+                              className="object-cover"
+                              sizes="(min-width: 768px) 80vw, 100vw"
+                            />
+                          </div>
+                        </CarouselItem>
+                      ))}
+                    </CarouselContent>
+                    <CarouselPrevious className="left-4" />
+                    <CarouselNext className="right-4" />
+                  </Carousel>
+                ) : (
+                  <div className="aspect-video relative">
+                    <Image
+                      src={selectedItem.images[0]}
+                      alt={selectedItem.title}
+                      fill
+                      className="object-cover"
+                      sizes="(min-width: 768px) 80vw, 100vw"
+                    />
+                  </div>
+                )}
+                <div className="p-8">
+                  <span className="text-sm text-accent font-medium uppercase tracking-wider">
+                    {selectedItem.subtitle}
+                  </span>
+                  <h3 className="text-2xl md:text-3xl font-bold mt-2 mb-4">
+                    {selectedItem.title}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {selectedItem.description}
+                  </p>
+                </div>
+              </div>
+            )}
+          </DialogContent>
+        </Dialog>
       </div>
     </section>
   )
