@@ -64,7 +64,7 @@ export function Newsletter() {
             <Button
               type="submit"
               disabled={isLoading}
-              className="bg-accent text-accent-foreground hover:bg-accent/90 hover:scale-105 active:scale-95 transition-all duration-300 flex-shrink-0 h-12 px-8 shadow-lg shadow-accent/30"
+              className="bg-accent text-black hover:bg-accent/80 hover:text-black hover:scale-105 active:scale-95 transition-all duration-300 flex-shrink-0 h-12 px-8 shadow-lg shadow-accent/30"
             >
               {isLoading ? t.newsletter.subscribing : t.newsletter.subscribe}
             </Button>

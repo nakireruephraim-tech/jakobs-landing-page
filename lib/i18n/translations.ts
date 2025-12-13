@@ -142,7 +142,7 @@ export const translations: Record<Language, Translations> = {
       badge: "Built by Africa, accelerated through AI.",
       title: "Jakob's is a creative studio built by AI-native developers and creators.",
       subtitle: "We build apps, create content, and push the boundaries of what's possible with AI.",
-      primaryCta: "Start a Project",
+      primaryCta: "Work with us",
       secondaryCta: "Subscribe to Newsletter",
     },
     domains: {
@@ -248,8 +248,8 @@ export const translations: Record<Language, Translations> = {
       aboutTitle: "About Jakob's",
       aboutLinks: [
         { label: "Our Story", href: "#" },
-        { label: "Core Values", href: "#" },
-        { label: "Vision", href: "#" },
+        { label: "Core Values", href: "/brand" },
+        { label: "Vision", href: "/brand" },
       ],
       servicesTitle: "Services",
       servicesLinks: [

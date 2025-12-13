@@ -1,15 +1,51 @@
 "use client"
 
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { Mail, MapPin } from "lucide-react"
+import { Mail, MapPin, Loader2 } from "lucide-react"
 import { useLanguage } from "@/lib/i18n/LanguageContext"
 
 export function Contact() {
   const { t } = useLanguage()
+  const [isLoading, setIsLoading] = useState(false)
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle")
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    setIsLoading(true)
+    setStatus("idle")
+
+    const formData = new FormData(e.currentTarget)
+    const data = {
+      name: formData.get("name") as string,
+      email: formData.get("email") as string,
+      service: formData.get("service") as string,
+      message: formData.get("message") as string,
+    }
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      })
+
+      if (response.ok) {
+        setStatus("success")
+        e.currentTarget.reset()
+      } else {
+        setStatus("error")
+      }
+    } catch {
+      setStatus("error")
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   return (
     <section id="contact" className="py-24 relative overflow-hidden">
@@ -25,11 +61,13 @@ export function Contact() {
 
         <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
           <Card className="p-8 bg-card border-border hover:border-primary/30 transition-colors duration-300 shadow-xl shadow-black/5">
-            <form className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
                 <Label htmlFor="name" className="text-sm font-medium">{t.contact.form.nameLabel}</Label>
                 <Input 
-                  id="name" 
+                  id="name"
+                  name="name"
+                  required
                   placeholder={t.contact.form.namePlaceholder} 
                   className="bg-background border-border focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all duration-300" 
                 />
@@ -38,8 +76,10 @@ export function Contact() {
               <div className="space-y-2">
                 <Label htmlFor="email" className="text-sm font-medium">{t.contact.form.emailLabel}</Label>
                 <Input 
-                  id="email" 
-                  type="email" 
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
                   placeholder={t.contact.form.emailPlaceholder} 
                   className="bg-background border-border focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all duration-300" 
                 />
@@ -49,6 +89,7 @@ export function Contact() {
                 <Label htmlFor="service" className="text-sm font-medium">{t.contact.form.serviceLabel}</Label>
                 <Input
                   id="service"
+                  name="service"
                   placeholder={t.contact.form.servicePlaceholder}
                   className="bg-background border-border focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all duration-300"
                 />
@@ -58,14 +99,39 @@ export function Contact() {
                 <Label htmlFor="message" className="text-sm font-medium">{t.contact.form.messageLabel}</Label>
                 <Textarea
                   id="message"
+                  name="message"
+                  required
                   placeholder={t.contact.form.messagePlaceholder}
                   className="bg-background border-border min-h-32 focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all duration-300 resize-none"
                 />
               </div>
 
-              <Button className="w-full bg-accent text-accent-foreground hover:bg-accent/90 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-lg shadow-accent/20" size="lg">
-                {t.contact.form.submit}
+              <Button 
+                type="submit"
+                disabled={isLoading}
+                className="w-full bg-accent text-accent-foreground hover:bg-accent/90 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-lg shadow-accent/20 disabled:opacity-70" 
+                size="lg"
+              >
+                {isLoading ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Sending...
+                  </>
+                ) : (
+                  t.contact.form.submit
+                )}
               </Button>
+
+              {status === "success" && (
+                <p className="text-sm text-green-500 text-center animate-fade-in">
+                  Message sent successfully! We&apos;ll get back to you soon.
+                </p>
+              )}
+              {status === "error" && (
+                <p className="text-sm text-red-500 text-center animate-fade-in">
+                  Something went wrong. Please try again or email us directly.
+                </p>
+              )}
             </form>
           </Card>
 
