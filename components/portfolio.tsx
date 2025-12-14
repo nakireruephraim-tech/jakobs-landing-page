@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef } from "react"
 import Image from "next/image"
 import { Card } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -21,12 +21,19 @@ interface GraphicItem {
   description: string
 }
 
+interface VideoItem {
+  src: string
+  title: string
+  category: string
+}
+
 export function Portfolio() {
   const { t } = useLanguage()
 
   const portfolioKeys = ["graphic", "video", "motion"] as const
 
   const [selectedItem, setSelectedItem] = useState<GraphicItem | null>(null)
+  const videoRefs = useRef<HTMLVideoElement[]>([])
 
   const graphicItems: GraphicItem[] = [
     {
@@ -87,6 +94,44 @@ export function Portfolio() {
     },
   ]
 
+  const videoItems: VideoItem[] = [
+    {
+      src: "/videos/Barcode Father's day final.mp4",
+      title: "Johnnie Walker – Father's Day",
+      category: "Campaign Video",
+    },
+    {
+      src: "/videos/Final Frog Cementis.mp4",
+      title: "Cementis – Frog Spot",
+      category: "Commercial",
+    },
+    {
+      src: "/videos/IMG_1326_1.mp4",
+      title: "Event Highlights",
+      category: "Events",
+    },
+    {
+      src: "/videos/Jude animated.mp4",
+      title: "Jude – Animated Piece",
+      category: "Animation",
+    },
+    {
+      src: "/videos/Swim completed.mp4",
+      title: "Swim – Brand Piece",
+      category: "Brand",
+    },
+    {
+      src: "/videos/To anvi kone komye to pou pey to loan toulemwa  Nou Loan Calculator online rann to lavi fasil ne.mp4",
+      title: "Maubank – Loan Calculator Explainer",
+      category: "Explainer",
+    },
+    {
+      src: "/videos/final brewpecks.mp4",
+      title: "Titan Coffee",
+      category: "Promo",
+    },
+  ]
+
   return (
     <section id="portfolio" className="py-24 bg-muted/30">
       <div className="container mx-auto px-4 lg:px-8">
@@ -120,47 +165,83 @@ export function Portfolio() {
           {portfolioKeys.map((key) => (
             <TabsContent key={key} value={key} className="animate-fade-in">
               <div className="grid md:grid-cols-2 gap-8">
-                {key === "graphic"
-                  ? graphicItems.map((item, index) => (
-                      <Card
-                        key={index}
-                        className="group overflow-hidden bg-card border-border hover:border-accent hover:-translate-y-2 hover:shadow-2xl hover:shadow-accent/10 transition-all duration-500 cursor-pointer"
-                        onClick={() => setSelectedItem(item)}
-                      >
-                        <div className="aspect-video relative overflow-hidden">
-                          <Image
-                            src={item.images[0]}
-                            alt={item.title}
-                            fill
-                            className="object-cover group-hover:scale-110 transition-transform duration-700"
-                            sizes="(min-width: 768px) 50vw, 100vw"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                        </div>
-                        <div className="p-6">
-                          <span className="text-xs text-accent font-medium uppercase tracking-wider">{item.subtitle}</span>
-                          <h3 className="text-xl font-bold mt-2 group-hover:text-primary transition-colors duration-300">
-                            {item.title}
-                          </h3>
-                        </div>
-                      </Card>
-                    ))
-                  : t.portfolio[key].map((item, index) => (
-                      <Card
-                        key={index}
-                        className="group overflow-hidden bg-card border-border hover:border-accent hover:-translate-y-2 hover:shadow-2xl hover:shadow-accent/10 transition-all duration-500 cursor-pointer"
-                      >
-                        <div className="aspect-video relative overflow-hidden">
-                          <div className="w-full h-full bg-gradient-to-br from-primary/20 to-accent/10 group-hover:from-primary/30 group-hover:to-accent/20 transition-all duration-500" />
-                        </div>
-                        <div className="p-6">
-                          <span className="text-xs text-accent font-medium">{item.category}</span>
-                          <h3 className="text-xl font-bold mt-2 group-hover:text-primary transition-colors duration-300">
-                            {item.title}
-                          </h3>
-                        </div>
-                      </Card>
-                    ))}
+                {key === "graphic" &&
+                  graphicItems.map((item, index) => (
+                    <Card
+                      key={index}
+                      className="group overflow-hidden bg-card border-border hover:border-accent hover:-translate-y-2 hover:shadow-2xl hover:shadow-accent/10 transition-all duration-500 cursor-pointer"
+                      onClick={() => setSelectedItem(item)}
+                    >
+                      <div className="aspect-video relative overflow-hidden">
+                        <Image
+                          src={item.images[0]}
+                          alt={item.title}
+                          fill
+                          className="object-cover group-hover:scale-110 transition-transform duration-700"
+                          sizes="(min-width: 768px) 50vw, 100vw"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      </div>
+                      <div className="p-6">
+                        <span className="text-xs text-accent font-medium uppercase tracking-wider">{item.subtitle}</span>
+                        <h3 className="text-xl font-bold mt-2 group-hover:text-primary transition-colors duration-300">
+                          {item.title}
+                        </h3>
+                      </div>
+                    </Card>
+                  ))}
+
+                {key === "video" &&
+                  videoItems.map((video, index) => (
+                    <Card
+                      key={index}
+                      className="group overflow-hidden bg-card border-border hover:border-accent hover:-translate-y-2 hover:shadow-2xl hover:shadow-accent/10 transition-all duration-500"
+                    >
+                      <div className="aspect-video relative overflow-hidden">
+                        <video
+                          src={video.src}
+                          controls
+                          ref={(el) => {
+                            if (el) {
+                              videoRefs.current[index] = el
+                            }
+                          }}
+                          onPlay={() => {
+                            videoRefs.current.forEach((v, i) => {
+                              if (i !== index && v && !v.paused) {
+                                v.pause()
+                              }
+                            })
+                          }}
+                          className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                        />
+                      </div>
+                      <div className="p-6">
+                        <span className="text-xs text-accent font-medium uppercase tracking-wider">{video.category}</span>
+                        <h3 className="text-xl font-bold mt-2 group-hover:text-primary transition-colors duration-300">
+                          {video.title}
+                        </h3>
+                      </div>
+                    </Card>
+                  ))}
+
+                {key === "motion" &&
+                  t.portfolio.motion.map((item, index) => (
+                    <Card
+                      key={index}
+                      className="group overflow-hidden bg-card border-border hover:border-accent hover:-translate-y-2 hover:shadow-2xl hover:shadow-accent/10 transition-all duration-500 cursor-pointer"
+                    >
+                      <div className="aspect-video relative overflow-hidden">
+                        <div className="w-full h-full bg-gradient-to-br from-primary/20 to-accent/10 group-hover:from-primary/30 group-hover:to-accent/20 transition-all duration-500" />
+                      </div>
+                      <div className="p-6">
+                        <span className="text-xs text-accent font-medium">{item.category}</span>
+                        <h3 className="text-xl font-bold mt-2 group-hover:text-primary transition-colors duration-300">
+                          {item.title}
+                        </h3>
+                      </div>
+                    </Card>
+                  ))}
               </div>
             </TabsContent>
           ))}

@@ -7,7 +7,10 @@ import { useLanguage } from "@/lib/i18n/LanguageContext"
 const socials = [
   { label: "Twitter", href: "#" },
   { label: "LinkedIn", href: "#" },
-  { label: "Instagram", href: "#" },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/jakobsstudio?igsh=MTNvNGJkYjgwN3h3cw%3D%3D&utm_source=qr",
+  },
   { label: "GitHub", href: "#" },
 ]
 
