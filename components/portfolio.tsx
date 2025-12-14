@@ -27,6 +27,12 @@ interface VideoItem {
   category: string
 }
 
+interface SoftwareItem {
+  title: string
+  category: string
+  videoSrc?: string
+}
+
 export function Portfolio() {
   const { t } = useLanguage()
 
@@ -132,6 +138,43 @@ export function Portfolio() {
     },
   ]
 
+  const softwareItems: SoftwareItem[] = [
+    {
+      title: "AI Rapporteur",
+      category: "AI / NLP",
+    },
+    {
+      title: "Radiology Model Finetuning",
+      category: "Medical Imaging",
+    },
+    {
+      title: "Tennis Match Outcome Prediction Model",
+      category: "Sports Analytics",
+    },
+    {
+      title: "Student Planner Mobile App",
+      category: "Education / Productivity",
+    },
+    {
+      title: "AI E-Recruitment Pipeline",
+      category: "HR / Talent",
+    },
+    {
+      title: "AI Information Extraction Microservice",
+      category: "Backend / AI",
+    },
+    {
+      title: "Customer Service Conversation AI Agent",
+      category: "Customer Support",
+    },
+    {
+      title: "Pigby: Money Tracker App",
+      category: "Fintech / Product",
+      // Temporarily reuse one of the portfolio videos until a dedicated Pigby video is provided
+      videoSrc: "/videos/Final Frog Cementis.mp4",
+    },
+  ]
+
   return (
     <section id="portfolio" className="py-24 bg-muted/30">
       <div className="container mx-auto px-4 lg:px-8">
@@ -226,16 +269,24 @@ export function Portfolio() {
                   ))}
 
                 {key === "motion" &&
-                  t.portfolio.motion.map((item, index) => (
+                  softwareItems.map((item, index) => (
                     <Card
                       key={index}
                       className="group overflow-hidden bg-card border-border hover:border-accent hover:-translate-y-2 hover:shadow-2xl hover:shadow-accent/10 transition-all duration-500 cursor-pointer"
                     >
                       <div className="aspect-video relative overflow-hidden">
-                        <div className="w-full h-full bg-gradient-to-br from-primary/20 to-accent/10 group-hover:from-primary/30 group-hover:to-accent/20 transition-all duration-500" />
+                        {item.videoSrc ? (
+                          <video
+                            src={item.videoSrc}
+                            controls
+                            className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-gradient-to-br from-primary/20 to-accent/10 group-hover:from-primary/30 group-hover:to-accent/20 transition-all duration-500" />
+                        )}
                       </div>
                       <div className="p-6">
-                        <span className="text-xs text-accent font-medium">{item.category}</span>
+                        <span className="text-xs text-accent font-medium uppercase tracking-wider">{item.category}</span>
                         <h3 className="text-xl font-bold mt-2 group-hover:text-primary transition-colors duration-300">
                           {item.title}
                         </h3>
