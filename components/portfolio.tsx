@@ -102,7 +102,7 @@ export function Portfolio() {
 
   const videoItems: VideoItem[] = [
     {
-      src: "/videos/Barcode Father's day final.mp4",
+      src: "/videos/Father day johnny.mp4",
       title: "Johnnie Walker – Father's Day",
       category: "Campaign Video",
     },
@@ -112,27 +112,27 @@ export function Portfolio() {
       category: "Commercial",
     },
     {
-      src: "/videos/IMG_1326_1.mp4",
+      src: "/videos/Ba comp.mp4",
       title: "Event Highlights",
       category: "Events",
     },
     {
-      src: "/videos/Jude animated.mp4",
+      src: "/videos/Jude.mp4",
       title: "Jude – Animated Piece",
       category: "Animation",
     },
     {
-      src: "/videos/Swim completed.mp4",
+      src: "/videos/Swim comp.mp4",
       title: "Swim – Brand Piece",
       category: "Brand",
     },
     {
-      src: "/videos/To anvi kone komye to pou pey to loan toulemwa  Nou Loan Calculator online rann to lavi fasil ne.mp4",
+      src: "/videos/Loan comp.mp4",
       title: "Maubank – Loan Calculator Explainer",
       category: "Explainer",
     },
     {
-      src: "/videos/final brewpecks.mp4",
+      src: "/videos/Titans Screen comp.mp4",
       title: "Titan Coffee",
       category: "Promo",
     },
@@ -170,8 +170,7 @@ export function Portfolio() {
     {
       title: "Pigby: Money Tracker App",
       category: "Fintech / Product",
-      // Temporarily reuse one of the portfolio videos until a dedicated Pigby video is provided
-      videoSrc: "/videos/Final Frog Cementis.mp4",
+      videoSrc: "/videos/Pigby screen record comp.mp4",
     },
   ]
 
