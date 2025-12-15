@@ -37,7 +37,7 @@ export function Hero() {
               </Button>
             </a>
             <a href="#newsletter">
-              <Button size="lg" variant="outline" className="border-primary/30 hover:bg-primary/10 hover:border-primary/50 hover:scale-105 active:scale-95 bg-transparent transition-all duration-300">
+              <Button size="lg" variant="outline" className="border-primary/30 hover:bg-primary/10 hover:text-primary hover:border-primary/50 hover:scale-105 active:scale-95 bg-transparent transition-all duration-300">
                 {t.hero.secondaryCta}
               </Button>
             </a>
