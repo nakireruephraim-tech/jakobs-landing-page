@@ -5,13 +5,16 @@ import Image from "next/image"
 import { useLanguage } from "@/lib/i18n/LanguageContext"
 
 const socials = [
-  { label: "Twitter", href: "#" },
-  { label: "LinkedIn", href: "#" },
+  { label: "X", href: "https://x.com/jakobsstudio?s=11" },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/jakobs-studio-960a723a0?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
+  },
   {
     label: "Instagram",
     href: "https://www.instagram.com/jakobsstudio?igsh=MTNvNGJkYjgwN3h3cw%3D%3D&utm_source=qr",
   },
-  { label: "GitHub", href: "#" },
+  { label: "GitHub", href: "https://github.com/davidtadediji" },
 ]
 
 export function Footer() {
@@ -65,6 +68,8 @@ export function Footer() {
               <Link
                 key={social.label}
                 href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-secondary-foreground/70 hover:text-accent transition-colors duration-300 text-sm"
               >
                 {social.label}
