@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { supabase } from "@/lib/supabase"
+import { getSupabaseClient } from "@/lib/supabase"
 
 export async function POST(request: Request) {
   try {
@@ -10,6 +10,11 @@ export async function POST(request: Request) {
     }
 
     const trimmedEmail = email.trim().toLowerCase()
+
+    const supabase = getSupabaseClient()
+    if (!supabase) {
+      return NextResponse.json({ error: "Server is not configured" }, { status: 500 })
+    }
 
     const { error } = await supabase.from("newsletter_subscriptions").insert({ email: trimmedEmail })
 
