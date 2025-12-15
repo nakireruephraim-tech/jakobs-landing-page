@@ -154,6 +154,7 @@ export function Portfolio() {
     {
       title: "Student Planner Mobile App",
       category: "Education / Productivity",
+      videoSrc: "/videos/new%20app%20comp.mp4",
     },
     {
       title: "AI E-Recruitment Pipeline",
@@ -278,7 +279,7 @@ export function Portfolio() {
                           <video
                             src={item.videoSrc}
                             controls
-                            className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                            className="w-full h-full object-contain bg-black/5 group-hover:scale-[1.01] transition-transform duration-500"
                           />
                         ) : (
                           <div className="w-full h-full bg-gradient-to-br from-primary/20 to-accent/10 group-hover:from-primary/30 group-hover:to-accent/20 transition-all duration-500" />
