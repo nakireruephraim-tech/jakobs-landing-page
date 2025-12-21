@@ -51,17 +51,27 @@ function LazyVideo({
     const el = localRef.current
     if (!el || shouldLoad) return
 
+    // Fallback: load after 2 seconds if IntersectionObserver doesn't fire
+    // (handles cases where video is in a hidden tab or observer fails)
+    const fallbackTimer = setTimeout(() => {
+      setShouldLoad(true)
+    }, 2000)
+
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries.some((e) => e.isIntersecting)) {
+          clearTimeout(fallbackTimer)
           setShouldLoad(true)
         }
       },
-      { root: null, rootMargin: "200px 0px", threshold: 0.01 },
+      { root: null, rootMargin: "400px 0px", threshold: 0 },
     )
 
     observer.observe(el)
-    return () => observer.disconnect()
+    return () => {
+      clearTimeout(fallbackTimer)
+      observer.disconnect()
+    }
   }, [shouldLoad])
 
   return (
