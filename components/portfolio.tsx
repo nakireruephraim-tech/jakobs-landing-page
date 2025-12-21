@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import { Card } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -33,6 +33,49 @@ interface SoftwareItem {
   videoSrc?: string
 }
 
+function LazyVideo({
+  src,
+  videoRef,
+  preload = "none",
+  ...props
+}: Omit<React.VideoHTMLAttributes<HTMLVideoElement>, "src" | "preload" | "ref"> & {
+  src: string
+  videoRef?: (el: HTMLVideoElement | null) => void
+  preload?: "none" | "metadata" | "auto"
+}) {
+  const localRef = useRef<HTMLVideoElement | null>(null)
+  const [shouldLoad, setShouldLoad] = useState(false)
+
+  useEffect(() => {
+    const el = localRef.current
+    if (!el || shouldLoad) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setShouldLoad(true)
+        }
+      },
+      { root: null, rootMargin: "200px 0px", threshold: 0.01 },
+    )
+
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [shouldLoad])
+
+  return (
+    <video
+      {...props}
+      ref={(el) => {
+        localRef.current = el
+        videoRef?.(el)
+      }}
+      preload={shouldLoad ? preload : "none"}
+      src={shouldLoad ? src : undefined}
+    />
+  )
+}
+
 export function Portfolio() {
   const { t } = useLanguage()
 
@@ -42,27 +85,6 @@ export function Portfolio() {
   const videoRefs = useRef<HTMLVideoElement[]>([])
 
   const graphicItems: GraphicItem[] = [
-    {
-      images: ["/portfolio/Screenshot 2025-12-13 at 23.59.24.png"],
-      title: "Beau Plan",
-      subtitle: "Souvenir Campaign",
-      description: "We developed the key visuals that capture the essence of the brand and its offerings. This included creating a cohesive suite of print and digital assets to effectively communicate the campaign's message across various channels, fostering a connection to the Beau Plan experience.",
-    },
-    {
-      images: ["/portfolio/Screenshot 2025-12-13 at 23.59.53.png"],
-      title: "Phoenix Beer",
-      subtitle: "Euro 2024 Campaign",
-      description: "For the Euro Fiesta campaign, we created the key visuals that encapsulate the vibrant spirit of the event. This involved developing a cohesive range of print and digital assets to effectively promote the campaign across various platforms. The design elements were tailored to engage audiences and enhance the overall festive experience.",
-    },
-    {
-      images: [
-        "/portfolio/Screenshot 2025-12-14 at 00.00.26.png",
-        "/portfolio/Screenshot 2025-12-14 at 00.01.12.png",
-      ],
-      title: "Diageo",
-      subtitle: "Spirits Club",
-      description: "The brand identity design for The Perfect Blend embodies the essence of sophistication and exclusivity. Through an elegant interplay of visuals, it encapsulates the refined world of spirits, celebrating the artistry of blending not only in taste but also in community, where diverse backgrounds converge into a seamless tapestry of shared passion and elevated experiences.",
-    },
     {
       images: [
         "/portfolio/Screenshot 2025-12-14 at 00.01.34.png",
@@ -83,20 +105,6 @@ export function Portfolio() {
       title: "Mersea",
       subtitle: "Fish and Seafood Store",
       description: "A promise of expertise, of hard work and hard-earned fresh fish and seafood. We needed to represent the bonds that Mersea is building through its service - connecting the people of Mauritius into a network of handpicked and honest quality.",
-    },
-    {
-      images: ["/portfolio/Screenshot 2025-12-14 at 00.05.21.png"],
-      title: "Out of Office",
-      subtitle: "Rogers Hospitality Magazine",
-      description:
-        "Rogers Hospitality's annual magazine 'Out of Office' aims to deliver an aperçu of the island to tourists and visitors. We mixed traditional tropical paintings with textures and beautiful imagery to portray the island in this handy pocket-sized magazine.",
-    },
-    {
-      images: ["/portfolio/Screenshot 2025-12-14 at 00.04.13.png"],
-      title: "SBM",
-      subtitle: "Annual Report",
-      description:
-        "For the SBM Integrated Report themed 'Embarking on a sustainable & purposeful journey,' this design proposal integrates 10 thematic dividers showcasing SBM's tangible actions towards sustainability, complemented by personal testimonials. The SBM icon transforms into a window revealing the bank's role as an enabler of sustainable futures, blending impactful narratives with innovative design.",
     },
   ]
 
@@ -221,6 +229,7 @@ export function Portfolio() {
                           alt={item.title}
                           fill
                           className="object-cover group-hover:scale-110 transition-transform duration-700"
+                          loading="lazy"
                           sizes="(min-width: 768px) 50vw, 100vw"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -241,10 +250,11 @@ export function Portfolio() {
                       className="group overflow-hidden bg-card border-border hover:border-accent hover:-translate-y-2 hover:shadow-2xl hover:shadow-accent/10 transition-all duration-500"
                     >
                       <div className="aspect-video relative overflow-hidden">
-                        <video
+                        <LazyVideo
                           src={video.src}
                           controls
-                          ref={(el) => {
+                          preload="metadata"
+                          videoRef={(el) => {
                             if (el) {
                               videoRefs.current[index] = el
                             }
@@ -276,9 +286,10 @@ export function Portfolio() {
                     >
                       <div className="aspect-video relative overflow-hidden">
                         {item.videoSrc ? (
-                          <video
+                          <LazyVideo
                             src={item.videoSrc}
                             controls
+                            preload="metadata"
                             className="w-full h-full object-contain bg-black/5 group-hover:scale-[1.01] transition-transform duration-500"
                           />
                         ) : (
@@ -314,6 +325,7 @@ export function Portfolio() {
                               alt={`${selectedItem.title} - ${idx + 1}`}
                               fill
                               className="object-cover"
+                              loading="lazy"
                               sizes="(min-width: 768px) 80vw, 100vw"
                             />
                           </div>
@@ -330,6 +342,7 @@ export function Portfolio() {
                       alt={selectedItem.title}
                       fill
                       className="object-cover"
+                      loading="lazy"
                       sizes="(min-width: 768px) 80vw, 100vw"
                     />
                   </div>
