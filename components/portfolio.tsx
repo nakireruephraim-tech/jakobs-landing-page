@@ -25,6 +25,7 @@ interface VideoItem {
   src: string
   title: string
   category: string
+  poster?: string
 }
 
 interface SoftwareItem {
@@ -106,43 +107,48 @@ export function Portfolio() {
       subtitle: "Fish and Seafood Store",
       description: "A promise of expertise, of hard work and hard-earned fresh fish and seafood. We needed to represent the bonds that Mersea is building through its service - connecting the people of Mauritius into a network of handpicked and honest quality.",
     },
+    {
+      images: [
+        "/portfolio/2423bb2a-702d-46d9-9b4c-7f77b520ccf7.JPG",
+        "/portfolio/42bad916-fbaf-4d19-bc44-b9948178cf02.JPG",
+        "/portfolio/8372deb6-9cab-4643-b22c-a50f0a0c7129.JPG",
+        "/portfolio/aab8cedc-ae00-472b-9b4d-adb6c4ffa7df.JPG",
+      ],
+      title: "Constance Group",
+      subtitle: "Branding",
+      description: "",
+    },
   ]
 
   const videoItems: VideoItem[] = [
     {
-      src: "/videos/Father day johnny.mp4",
-      title: "Johnnie Walker – Father's Day",
-      category: "Campaign Video",
-    },
-    {
-      src: "/videos/Final Frog Cementis.mp4",
-      title: "Cementis – Frog Spot",
-      category: "Commercial",
-    },
-    {
       src: "/videos/Ba comp.mp4",
       title: "Event Highlights",
       category: "Events",
-    },
-    {
-      src: "/videos/Jude.mp4",
-      title: "Jude – Animated Piece",
-      category: "Animation",
+      poster: "/videos/posters/ba-comp.jpg",
     },
     {
       src: "/videos/Swim comp.mp4",
       title: "Swim – Brand Piece",
       category: "Brand",
-    },
-    {
-      src: "/videos/Loan comp.mp4",
-      title: "Maubank – Loan Calculator Explainer",
-      category: "Explainer",
+      poster: "/videos/posters/swim-comp.jpg",
     },
     {
       src: "/videos/Titans Screen comp.mp4",
       title: "Titan Coffee",
       category: "Promo",
+      poster: "/videos/posters/titans-screen-comp.jpg",
+    },
+    { src: "/videos/image00009.mp4",
+      title: "Induction day",
+      category: "Student comming to school",
+      poster: "/videos/posters/image00009.jpg",
+    },
+    {
+      src: "/videos/Mom for you (reduce) .mp4",
+      title: "Workout session",
+      category: "Motivation",
+      poster: "/videos/posters/mom-for-you (reduce) .jpg",
     },
   ]
 
@@ -254,6 +260,7 @@ export function Portfolio() {
                           src={video.src}
                           controls
                           preload="metadata"
+                          poster={video.poster}
                           videoRef={(el) => {
                             if (el) {
                               videoRefs.current[index] = el
