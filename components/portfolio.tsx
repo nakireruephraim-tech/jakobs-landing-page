@@ -92,8 +92,39 @@ export function Portfolio() {
 
   const portfolioKeys = ["graphic", "video", "motion"] as const
 
+  type PortfolioTab = (typeof portfolioKeys)[number]
+
+  const getTabFromHash = (): PortfolioTab | null => {
+    if (typeof window === "undefined") return null
+    const hash = window.location.hash
+    const prefix = "#portfolio-"
+    if (!hash.startsWith(prefix)) return null
+    const candidate = hash.slice(prefix.length) as PortfolioTab
+    return portfolioKeys.includes(candidate) ? candidate : null
+  }
+
+  const [activeTab, setActiveTab] = useState<PortfolioTab>("graphic")
+
   const [selectedItem, setSelectedItem] = useState<GraphicItem | null>(null)
   const videoRefs = useRef<HTMLVideoElement[]>([])
+
+  useEffect(() => {
+    const syncFromHash = () => {
+      const tab = getTabFromHash()
+      if (tab) {
+        setActiveTab(tab)
+        // Manually scroll to section since the hash ID (e.g. #portfolio-video) doesn't exist on an element
+        const section = document.getElementById("portfolio")
+        if (section) {
+          section.scrollIntoView({ behavior: "smooth" })
+        }
+      }
+    }
+
+    syncFromHash()
+    window.addEventListener("hashchange", syncFromHash)
+    return () => window.removeEventListener("hashchange", syncFromHash)
+  }, [activeTab])
 
   const graphicItems: GraphicItem[] = [
     {
@@ -200,14 +231,29 @@ export function Portfolio() {
   ]
 
   return (
-    <section id="portfolio" className="py-24 bg-muted/30">
+    <section id="portfolio" className="py-24 bg-muted/30 relative">
+      {/* Deep linking anchors */}
+      {portfolioKeys.map((key) => (
+        <div key={key} id={`portfolio-${key}`} className="absolute top-0 left-0 w-full h-full -z-50 pointer-events-none invisible" style={{ scrollMarginTop: "100px" }} />
+      ))}
       <div className="container mx-auto px-4 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">{t.portfolio.sectionTitle}</h2>
           <p className="text-xl text-muted-foreground">{t.portfolio.sectionSubtitle}</p>
         </div>
 
-        <Tabs defaultValue="graphic" className="max-w-5xl mx-auto">
+        <Tabs
+          value={activeTab}
+          onValueChange={(next) => {
+            const nextTab = next as PortfolioTab
+            setActiveTab(nextTab)
+
+            if (typeof window !== "undefined") {
+              window.history.replaceState(null, "", `#portfolio-${nextTab}`)
+            }
+          }}
+          className="max-w-5xl mx-auto"
+        >
           <TabsList className="grid grid-cols-3 gap-2 h-auto bg-transparent max-w-md mx-auto mb-12">
             <TabsTrigger
               value="graphic"

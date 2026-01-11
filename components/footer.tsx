@@ -45,12 +45,21 @@ export function Footer() {
               <ul className="space-y-3">
                 {section.links.map((link) => (
                   <li key={link.label}>
-                    <Link
-                      href={link.href}
-                      className="text-secondary-foreground/70 hover:text-accent hover:translate-x-1 transition-all duration-300 inline-block"
-                    >
-                      {link.label}
-                    </Link>
+                    {link.href.startsWith("#") ? (
+                      <a
+                        href={link.href}
+                        className="text-secondary-foreground/70 hover:text-accent hover:translate-x-1 transition-all duration-300 inline-block"
+                      >
+                        {link.label}
+                      </a>
+                    ) : (
+                      <Link
+                        href={link.href}
+                        className="text-secondary-foreground/70 hover:text-accent hover:translate-x-1 transition-all duration-300 inline-block"
+                      >
+                        {link.label}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>

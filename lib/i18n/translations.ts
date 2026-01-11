@@ -253,10 +253,10 @@ export const translations: Record<Language, Translations> = {
       ],
       servicesTitle: "Services",
       servicesLinks: [
-        { label: "Software Development", href: "#services" },
-        { label: "AI Solutions", href: "#services" },
-        { label: "Content Creation", href: "#portfolio" },
-        { label: "Digital Marketing", href: "#services" },
+        { label: "Software Development", href: "#services-software" },
+        { label: "AI Solutions", href: "#services-ai" },
+        { label: "Content Creation", href: "#services-video" },
+        { label: "Digital Marketing", href: "#services-marketing" },
       ],
       contactTitle: "Contact",
       contactLinks: [
@@ -390,10 +390,10 @@ export const translations: Record<Language, Translations> = {
       ],
       servicesTitle: "Servicios",
       servicesLinks: [
-        { label: "Desarrollo de Software", href: "#services" },
-        { label: "Soluciones de IA", href: "#services" },
-        { label: "Creación de Contenido", href: "#portfolio" },
-        { label: "Marketing Digital", href: "#services" },
+        { label: "Desarrollo de Software", href: "#services-software" },
+        { label: "Soluciones de IA", href: "#services-ai" },
+        { label: "Creación de Contenido", href: "#services-video" },
+        { label: "Marketing Digital", href: "#services-marketing" },
       ],
       contactTitle: "Contacto",
       contactLinks: [
@@ -527,10 +527,10 @@ export const translations: Record<Language, Translations> = {
       ],
       servicesTitle: "Services",
       servicesLinks: [
-        { label: "Développement Logiciel", href: "#services" },
-        { label: "Solutions IA", href: "#services" },
-        { label: "Création de Contenu", href: "#portfolio" },
-        { label: "Marketing Digital", href: "#services" },
+        { label: "Développement Logiciel", href: "#services-software" },
+        { label: "Solutions IA", href: "#services-ai" },
+        { label: "Création de Contenu", href: "#services-video" },
+        { label: "Marketing Digital", href: "#services-marketing" },
       ],
       contactTitle: "Contact",
       contactLinks: [
@@ -664,10 +664,10 @@ export const translations: Record<Language, Translations> = {
       ],
       servicesTitle: "服务",
       servicesLinks: [
-        { label: "软件开发", href: "#services" },
-        { label: "AI 解决方案", href: "#services" },
-        { label: "内容创作", href: "#portfolio" },
-        { label: "数字营销", href: "#services" },
+        { label: "软件开发", href: "#services-software" },
+        { label: "AI 解决方案", href: "#services-ai" },
+        { label: "内容创作", href: "#services-video" },
+        { label: "数字营销", href: "#services-marketing" },
       ],
       contactTitle: "联系方式",
       contactLinks: [
