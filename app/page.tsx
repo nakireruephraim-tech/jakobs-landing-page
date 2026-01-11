@@ -18,7 +18,7 @@ export default function Page() {
       <Projects />
       <PortfolioClient />
       <Contact />
-      <Newsletter />
+      {/* <Newsletter /> */}
       <Footer />
     </main>
   )
