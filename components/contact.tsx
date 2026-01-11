@@ -84,9 +84,10 @@ export function Contact() {
                 <p className="font-medium mb-1">{t.contact.info.emailLabel}</p>
                 <a
                   href="mailto:contact@jakobs.studio"
-                  className="text-muted-foreground hover:text-primary transition-colors duration-300"
+                  className="inline-flex items-center gap-2 text-primary font-semibold underline underline-offset-4 decoration-primary/60 hover:decoration-primary hover:text-primary/90 transition-colors duration-300"
                 >
-                  contact@jakobs.studio
+                  <span>contact@jakobs.studio</span>
+                  <span className="text-xs text-muted-foreground">(Click to email)</span>
                 </a>
               </div>
             </div>
